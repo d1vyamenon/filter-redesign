@@ -51,10 +51,10 @@
 
   /* ---------- Card ---------- */
   main{padding:22px 80px 75px 107px}
-  .card{background:var(--card);padding:30px 46px 170px 20px;position:relative;min-height:990px}
+  .card{background:var(--card);padding:30px 20px 170px 20px;position:relative;min-height:990px}
   .card-head{display:flex;justify-content:space-between;align-items:center}
   h1.students{font-size:18px;font-weight:700;margin:0 0 0 0}
-  .csv{color:var(--link);font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center;text-decoration:none;margin-right:6px;background:none;border:0;cursor:pointer}
+  .csv{color:var(--link);font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center;text-decoration:none;margin-right:0;background:none;border:0;cursor:pointer}
   .tiles{display:flex;gap:12px;margin-top:12px}
   .tile{border:1px solid #c9ccd6;border-radius:14px;padding:24px 22px 26px 23px;min-width:150px}
   .tile .t{font-size:16px;color:#2b2b30}
@@ -81,10 +81,10 @@
   .txtbtn.adv{color:var(--link)}
   .txtbtn.clear{color:#3b3d44}
   .txtbtn:hover{background:#f0f2f8}
-  .add-enroll{flex:none;background:var(--blue);color:#fff;border:0;border-radius:3px;height:32px;padding:0 24px 0 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:pointer;margin-right:46px}
+  .add-enroll{flex:none;background:var(--blue);color:#fff;border:0;border-radius:3px;height:32px;padding:0 24px 0 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:pointer;margin-right:0}
 
   /* ---------- Table ---------- */
-  table{width:1231px;border-collapse:collapse;margin-top:54px;font-size:16px}
+  table{width:100%;table-layout:auto;border-collapse:collapse;margin-top:54px;font-size:16px}
   thead tr{border-top:2px solid #e2e3e8;border-bottom:2px solid #e2e3e8}
   th{text-align:left;font-weight:400;height:50px;padding:0;white-space:nowrap}
   th button.sort{border:0;background:none;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:4px 2px;color:var(--text)}
@@ -259,10 +259,10 @@
       <thead>
         <tr>
           <th class="cbcell"><input type="checkbox" class="rowcb" id="selAll" aria-label="Select all visible students"></th>
-          <th style="width:205px" data-key="name" aria-sort="none"><button class="sort" type="button">Student Name <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
-          <th style="width:305px" data-key="email" aria-sort="none"><button class="sort" type="button">Email <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
-          <th style="width:243px" data-key="last" aria-sort="none"><button class="sort" type="button">Last Interacted <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
-          <th style="width:210px" data-key="progress" aria-sort="none"><span class="info" role="img" aria-label="Progress is an estimate of student progress through the course" title="This is an estimate of student progress.">i</span><button class="sort" type="button">Student Progress <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
+          <th style="width:17%" data-key="name" aria-sort="none"><button class="sort" type="button">Student Name <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
+          <th style="width:25%" data-key="email" aria-sort="none"><button class="sort" type="button">Email <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
+          <th style="width:19%" data-key="last" aria-sort="none"><button class="sort" type="button">Last Interacted <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
+          <th style="width:17%" data-key="progress" aria-sort="none"><span class="info" role="img" aria-label="Progress is an estimate of student progress through the course" title="This is an estimate of student progress.">i</span><button class="sort" type="button">Student Progress <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
           <th data-key="prof" aria-sort="none"><button class="sort" type="button">Student Proficiency <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="#222" stroke-width="1.6"/></svg></button></th>
         </tr>
       </thead>
