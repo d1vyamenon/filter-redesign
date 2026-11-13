@@ -249,9 +249,9 @@
             <legend class="h">Student Progress</legend>
             <div class="prog-row">
               <div class="seg" role="radiogroup" aria-label="Student progress comparison">
-                <label><input type="radio" name="progress-op" value="lt" aria-label="Less than"><span aria-hidden="true">&lt;</span></label>
+                <label><input type="radio" name="progress-op" value="lt" aria-label="Less than or equal to"><span aria-hidden="true">≤</span></label>
                 <label><input type="radio" name="progress-op" value="eq" aria-label="Equal to"><span aria-hidden="true">=</span></label>
-                <label><input type="radio" name="progress-op" value="gt" aria-label="Greater than"><span aria-hidden="true">&gt;</span></label>
+                <label><input type="radio" name="progress-op" value="gt" aria-label="Greater than or equal to"><span aria-hidden="true">≥</span></label>
               </div>
               <div class="pct-wrap">
                 <label for="progress-pct" class="sr-only">Student progress percentage, 0 to 100</label>
@@ -266,9 +266,9 @@
             <legend class="h">Avg Score</legend>
             <div class="prog-row">
               <div class="seg" role="radiogroup" aria-label="Average score comparison">
-                <label><input type="radio" name="score-op" value="lt" aria-label="Less than"><span aria-hidden="true">&lt;</span></label>
+                <label><input type="radio" name="score-op" value="lt" aria-label="Less than or equal to"><span aria-hidden="true">≤</span></label>
                 <label><input type="radio" name="score-op" value="eq" aria-label="Equal to"><span aria-hidden="true">=</span></label>
-                <label><input type="radio" name="score-op" value="gt" aria-label="Greater than"><span aria-hidden="true">&gt;</span></label>
+                <label><input type="radio" name="score-op" value="gt" aria-label="Greater than or equal to"><span aria-hidden="true">≥</span></label>
               </div>
               <div class="pct-wrap">
                 <label for="score-pct" class="sr-only">Average score percentage, 0 to 100</label>
@@ -334,7 +334,7 @@
   <ul>
     <li><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move between controls</li>
     <li><kbd>Enter</kbd> / <kbd>Space</kbd> open Advanced Search</li>
-    <li><kbd>←</kbd> <kbd>→</kbd> pick &lt; = &gt;</li>
+    <li><kbd>←</kbd> <kbd>→</kbd> pick ≤ = ≥</li>
     <li><kbd>↑</kbd> <kbd>↓</kbd> change the %</li>
     <li><kbd>Space</kbd> toggles an attempts option</li>
     <li><kbd>Enter</kbd> applies · <kbd>Esc</kbd> closes</li>
@@ -376,8 +376,8 @@
   ];
   const pages = raw.map((r,i)=>({order:i+1, module:r[0], page:r[1], due:null, attempts:r[2], score:r[3], progress:r[4]}));
 
-  const opSym = {lt:"<", eq:"=", gt:">"};
-  const opWord = {lt:"less than", eq:"equal to", gt:"greater than"};
+  const opSym = {lt:"≤", eq:"=", gt:"≥"};
+  const opWord = {lt:"less than or equal to", eq:"equal to", gt:"greater than or equal to"};
   const attLabel = {none:"No Attempts", lt5:"Less than 5 Attempts", gt5:"More than 5 Attempts"};
   const ranges = {
     progress:{name:"Progress", spoken:"Student progress"},
@@ -399,7 +399,7 @@
   const dialog=$("#filterDialog"), scrim=$("#scrim"), form=$("#filterForm");
 
   function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-  const cmp = (v,op,n)=> op==="lt"? v<n : op==="eq"? v===n : v>n;
+  const cmp = (v,op,n)=> op==="lt"? v<=n : op==="eq"? v===n : v>=n;
 
   // Tiles
   $("#tLowScore").textContent = pages.filter(p=>p.score!==null && p.score<50).length;
@@ -559,7 +559,7 @@
       if(raw===""||!Number.isInteger(v)||v<0||v>100){ setErr(k,"Enter a whole number from 0 to 100."); return {error:inp}; }
       setErr(k,""); return {op:opEl.value,pct:v};
     }
-    if(raw!==""&&v!==0){ setErr(k,"Choose <, = or > to use this filter."); return {error:form.querySelector(`input[name=${k}-op]`)}; }
+    if(raw!==""&&v!==0){ setErr(k,"Choose ≤, = or ≥ to use this filter."); return {error:form.querySelector(`input[name=${k}-op]`)}; }
     setErr(k,""); return {op:null,pct:0};
   }
 

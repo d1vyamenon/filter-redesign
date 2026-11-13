@@ -7,7 +7,7 @@ Interactive prototype of a redesigned filter system for the OLI Torus instructor
 
 The top nav links the two pages. Scored Pages uses illustrative sample data.
 
-The original per-filter dropdowns are replaced with a single **Advanced Search** dialog (Progress `< = >` + percentage, Proficiency checkboxes), with applied filters shown as removable chips.
+The original per-filter dropdowns are replaced with a single **Advanced Search** dialog (Progress `≤ = ≥` + percentage, Proficiency checkboxes), with applied filters shown as removable chips.
 
 ## Keyboard & WCAG 2.2 AA
 - Dialog: `role="dialog"`, `aria-modal`, focus moves in on open, Tab is contained, `Esc` closes, focus returns to the trigger; background is `inert`.

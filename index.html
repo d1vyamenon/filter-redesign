@@ -225,9 +225,9 @@
             <legend class="h">Progress</legend>
             <div class="prog-row">
               <div class="seg" role="radiogroup" aria-label="Progress comparison">
-                <label><input type="radio" name="op" value="lt" aria-label="Less than"><span aria-hidden="true">&lt;</span></label>
+                <label><input type="radio" name="op" value="lt" aria-label="Less than or equal to"><span aria-hidden="true">≤</span></label>
                 <label><input type="radio" name="op" value="eq" aria-label="Equal to"><span aria-hidden="true">=</span></label>
-                <label><input type="radio" name="op" value="gt" aria-label="Greater than"><span aria-hidden="true">&gt;</span></label>
+                <label><input type="radio" name="op" value="gt" aria-label="Greater than or equal to"><span aria-hidden="true">≥</span></label>
               </div>
               <div class="pct-wrap">
                 <label for="pct" class="sr-only">Progress percentage, 0 to 100</label>
@@ -280,7 +280,7 @@
   <ul>
     <li><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move between controls</li>
     <li><kbd>Enter</kbd> / <kbd>Space</kbd> open Advanced Search</li>
-    <li><kbd>←</kbd> <kbd>→</kbd> pick &lt; = &gt;</li>
+    <li><kbd>←</kbd> <kbd>→</kbd> pick ≤ = ≥</li>
     <li><kbd>↑</kbd> <kbd>↓</kbd> change the %</li>
     <li><kbd>Space</kbd> toggles a proficiency</li>
     <li><kbd>Enter</kbd> applies · <kbd>Esc</kbd> closes</li>
@@ -301,8 +301,8 @@
     {name:"Scott, Michael", email:"scott.michael@tvmail.com", last:"2025-04-24T13:38", lastLabel:"April 24, 2025 - 1:38 PM", progress:70, prof:"High"}
   ];
   const profRank = {"Not enough data":0, "Low":1, "Medium":2, "High":3};
-  const opSym = {lt:"<", eq:"=", gt:">"};
-  const opWord = {lt:"less than", eq:"equal to", gt:"greater than"};
+  const opSym = {lt:"≤", eq:"=", gt:"≥"};
+  const opWord = {lt:"less than or equal to", eq:"equal to", gt:"greater than or equal to"};
 
   // Applied state
   const state = { q:"", op:null, pct:0, prof:[], sort:{key:"name", dir:1, active:false} };
@@ -323,9 +323,9 @@
         if(!s.name.toLowerCase().includes(q) && !s.email.toLowerCase().includes(q)) return false;
       }
       if(state.op){
-        if(state.op==="lt" && !(s.progress < state.pct)) return false;
+        if(state.op==="lt" && !(s.progress <= state.pct)) return false;
         if(state.op==="eq" && !(s.progress === state.pct)) return false;
-        if(state.op==="gt" && !(s.progress > state.pct)) return false;
+        if(state.op==="gt" && !(s.progress >= state.pct)) return false;
       }
       if(state.prof.length && !state.prof.includes(s.prof)) return false;
       return true;
@@ -480,7 +480,7 @@
         pctIn.focus(); return;
       }
     } else if(raw!=="" && v!==0){
-      setErr("Choose <, = or > to filter by progress.");
+      setErr("Choose ≤, = or ≥ to filter by progress.");
       form.querySelector('input[name=op]').focus(); return;
     }
     state.op = opEl ? opEl.value : null;
