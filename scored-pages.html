@@ -64,20 +64,21 @@
 
   /* ---------- Filter bar ---------- */
   .filter-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-top:16px;position:relative}
-  .filterbar{flex:1;min-width:0;min-height:49px;border:1px solid #3d3f46;display:flex;align-items:center;gap:14px;padding:6px 10px 6px 14px;flex-wrap:nowrap}
-  .search{position:relative}
+  .filterbar{flex:1;min-width:0;display:flex;align-items:center;gap:12px}
+  .search{position:relative;flex:0 1 480px;min-width:240px}
   .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%)}
-  .search input{width:224px;height:36px;border:1px solid var(--ctl-border);border-radius:4px;padding:0 10px 0 36px;background:#fff}
-  .chips{display:flex;gap:10px 14px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-  .chip{display:flex;align-items:center;gap:6px;background:#eef3ff;border:1px solid #b9cdf6;border-radius:16px;height:32px;padding:0 4px 0 14px;font-size:14px;font-weight:600;color:#1b3f86}
-  .chip button{border:0;background:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#1b3f86;padding:0}
-  .chip button:hover{background:#d6e2fb}
-  .bar-actions{margin-left:auto;display:flex;align-items:center;gap:2px;flex:none}
-  .chips{flex:1 1 auto;min-width:0}
-  .chip{white-space:nowrap}
-  .search{flex:none;align-self:flex-start}
-  .txtbtn.adv.compact{padding:8px 8px}
-  .badge{background:var(--link);color:#fff;border-radius:10px;font-size:11px;font-weight:700;min-width:18px;height:18px;display:inline-grid;place-items:center;padding:0 5px}
+  .search input{width:100%;height:36px;border:1px solid var(--ctl-border);border-radius:4px;padding:0 10px 0 36px;background:#fff}
+  .applied{display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;margin-top:14px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+  .chip{display:flex;align-items:center;gap:6px;border:1px solid;border-radius:16px;height:32px;padding:0 4px 0 14px;font-size:14px;font-weight:600;white-space:nowrap;
+        background:var(--c-bg);border-color:var(--c-bd);color:var(--c-fg)}
+  .chip button{border:0;background:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:inherit;padding:0}
+  .chip button:hover{background:var(--c-bd)}
+  /* One colour per filter type; the label always names the filter too, so colour isn't the only cue (WCAG 1.4.1) */
+  .cat-progress{--c-bg:#eef3ff;--c-bd:#b9cdf6;--c-fg:#1b3f86}
+  .cat-prof{--c-bg:#f4effc;--c-bd:#d5c4f3;--c-fg:#55299a}
+  .cat-score{--c-bg:#e9f6f3;--c-bd:#a6dacb;--c-fg:#0f5547}
+  .cat-att{--c-bg:#fdf2e4;--c-bd:#efc995;--c-fg:#7a420f}
   .txtbtn{display:flex;align-items:center;gap:8px;border:0;background:none;cursor:pointer;font-size:14px;padding:8px 10px;border-radius:4px}
   .txtbtn.adv{color:var(--link)}
   .txtbtn.clear{color:#3b3d44}
@@ -85,7 +86,7 @@
   .add-enroll{flex:none;background:var(--blue);color:#fff;border:0;border-radius:3px;height:32px;padding:0 24px 0 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:pointer;margin-right:0}
 
   /* ---------- Table ---------- */
-  table{width:100%;table-layout:auto;border-collapse:collapse;margin-top:54px;font-size:16px}
+  table{width:100%;table-layout:auto;border-collapse:collapse;margin-top:28px;font-size:16px}
   thead tr{border-top:2px solid #e2e3e8;border-bottom:2px solid #e2e3e8}
   th{text-align:left;font-weight:400;height:50px;padding:0;white-space:nowrap}
   th button.sort{border:0;background:none;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:4px 2px;color:var(--text)}
@@ -225,17 +226,10 @@
           <label for="q" class="sr-only">Search pages by title</label>
           <input id="q" type="search" autocomplete="off">
         </div>
-        <ul class="chips" id="chips" aria-label="Active filters"></ul>
-        <div class="bar-actions">
-          <button class="txtbtn adv" id="advBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterDialog">
+        <button class="txtbtn adv" id="advBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterDialog">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
             <span id="advLabel">Advanced Search (0)</span>
           </button>
-          <button class="txtbtn clear" id="clearAll" type="button" hidden>
-            <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>
-            Clear All Filters
-          </button>
-        </div>
       </div>
 
       <!-- Filter dialog -->
@@ -294,6 +288,14 @@
           </div>
         </form>
       </div>
+    </div>
+
+    <div class="applied" id="applied" hidden>
+      <ul class="chips" id="chips" aria-label="Active filters"></ul>
+      <button class="txtbtn clear" id="clearAll" type="button" hidden>
+            <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>
+            Clear All Filters
+          </button>
     </div>
 
     <table aria-labelledby="pages-heading" aria-describedby="resultStatus">
@@ -479,13 +481,13 @@
   function renderChips(){
     const c=chipList();
     chipsEl.innerHTML=c.map(ch=>`
-      <li class="chip" data-id="${ch.id}">
+      <li class="chip cat-${ch.id.split("-")[0]}" data-id="${ch.id}">
         <span>${esc(ch.label)}</span>
         <button type="button" aria-label="Remove filter: ${esc(ch.spoken)}">
           <svg width="10" height="10" viewBox="0 0 10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l8 8M9 1 1 9"/></svg>
         </button>
       </li>`).join("");
-    chipsEl.hidden=c.length===0;
+    document.getElementById("applied").hidden = c.length===0;
     clearAll.hidden=c.length===0;
     $("#advLabel").textContent=`Advanced Search (${c.length})`;
     advBtn.setAttribute("aria-label",`Advanced Search, ${c.length} filter${c.length===1?"":"s"} active`);
@@ -520,7 +522,7 @@
 
   /* Dialog */
   let lastFocus=null;
-  const outside="header, .subtabs, .skip, .tiles, .card-head, .filterbar, table, .table-foot, .proto-note";
+  const outside="header, .subtabs, .skip, .tiles, .card-head, .filterbar, .applied, table, .table-foot, .proto-note";
   function setErr(k,msg){
     $(`#${k}-err`).textContent=msg;
     $(`#${k}-pct`).setAttribute("aria-invalid",msg?"true":"false");
