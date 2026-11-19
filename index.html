@@ -377,7 +377,7 @@
 
   function chipList(){
     const c = [];
-    if(state.op) c.push({id:"progress", tone: state.pct<=30?"low":"nd", group:"Progress", short:`${opSym[state.op]} ${state.pct}%`, label:`${opSym[state.op]}${state.pct}% Progress`, spoken:`Progress ${opWord[state.op]} ${state.pct}%`});
+    if(state.op) c.push({id:"progress", tone:"nd", group:"Progress", short:`${opSym[state.op]} ${state.pct}%`, label:`${opSym[state.op]}${state.pct}% Progress`, spoken:`Progress ${opWord[state.op]} ${state.pct}%`});
     ["Low","Medium","High"].forEach(p=>{ if(state.prof.includes(p)) c.push({id:"prof-"+p, tone:{Low:"low",Medium:"med",High:"high"}[p], group:"Proficiency", short:p, label:`${p} Proficiency`, spoken:`${p} proficiency`}) });
     return c;
   }

@@ -478,7 +478,7 @@
   function chipList(){
     const c=[];
     ["progress","score"].forEach(k=>{
-      const r=state[k]; if(r.op) c.push({id:k,tone:(k==='progress'? r.pct<=30 : r.pct<50)?'low':'nd',group:ranges[k].group,short:`${opSym[r.op]} ${r.pct}%`,label:`${opSym[r.op]}${r.pct}% ${ranges[k].name}`,spoken:`${ranges[k].spoken} ${opWord[r.op]} ${r.pct}%`});
+      const r=state[k]; if(r.op) c.push({id:k,tone:(k==='score' && r.pct<50)?'low':'nd',group:ranges[k].group,short:`${opSym[r.op]} ${r.pct}%`,label:`${opSym[r.op]}${r.pct}% ${ranges[k].name}`,spoken:`${ranges[k].spoken} ${opWord[r.op]} ${r.pct}%`});
     });
     ["none","lt5","gt5"].forEach(a=>{ if(state.att.includes(a)) c.push({id:"att-"+a,tone:"nd",group:"Total Attempts",short:attShort[a],label:attLabel[a],spoken:attLabel[a]}) });
     return c;
