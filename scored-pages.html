@@ -74,9 +74,14 @@
   .chip-group:first-child{padding-left:0;border-left:0}
   .grp-h{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#45474f;margin:0 0 6px}
   .chips{display:flex;gap:8px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-  .chip{display:flex;align-items:center;gap:4px;border:0;background:#e7eefc;color:#1b3f86;border-radius:16px;height:32px;padding:0 4px 0 17px;font-size:16px;line-height:24px;font-weight:400;white-space:nowrap}
+  .chip{display:flex;align-items:center;gap:4px;border:0;background:var(--c-bg);color:var(--c-fg);border-radius:16px;height:32px;padding:0 4px 0 17px;font-size:16px;line-height:24px;font-weight:400;white-space:nowrap}
   .chip button{border:0;background:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:inherit;padding:0}
-  .chip button:hover{background:#cfdcf8}
+  .chip button:hover{background:rgba(0,0,0,.09)}
+  /* Chip colours reuse the table's pill tokens */
+  .tone-low{--c-bg:#fde9ea;--c-fg:#c72a2a}
+  .tone-med{--c-bg:#fde7d6;--c-fg:#8a4a12}
+  .tone-high{--c-bg:#e6f6ec;--c-fg:#0f6b38}
+  .tone-nd{--c-bg:#dcdde2;--c-fg:#1b1b1f}
   .txtbtn{display:flex;align-items:center;gap:8px;border:0;background:none;cursor:pointer;font-size:14px;font-weight:700;padding:8px 10px;border-radius:4px}
   .txtbtn.adv{color:var(--link)}
   .txtbtn.clear{color:#3b3d44;font-weight:400}
@@ -473,9 +478,9 @@
   function chipList(){
     const c=[];
     ["progress","score"].forEach(k=>{
-      const r=state[k]; if(r.op) c.push({id:k,group:ranges[k].group,short:`${opSym[r.op]} ${r.pct}%`,label:`${opSym[r.op]}${r.pct}% ${ranges[k].name}`,spoken:`${ranges[k].spoken} ${opWord[r.op]} ${r.pct}%`});
+      const r=state[k]; if(r.op) c.push({id:k,tone:(k==='progress'? r.pct<=30 : r.pct<50)?'low':'nd',group:ranges[k].group,short:`${opSym[r.op]} ${r.pct}%`,label:`${opSym[r.op]}${r.pct}% ${ranges[k].name}`,spoken:`${ranges[k].spoken} ${opWord[r.op]} ${r.pct}%`});
     });
-    ["none","lt5","gt5"].forEach(a=>{ if(state.att.includes(a)) c.push({id:"att-"+a,group:"Total Attempts",short:attShort[a],label:attLabel[a],spoken:attLabel[a]}) });
+    ["none","lt5","gt5"].forEach(a=>{ if(state.att.includes(a)) c.push({id:"att-"+a,tone:"nd",group:"Total Attempts",short:attShort[a],label:attLabel[a],spoken:attLabel[a]}) });
     return c;
   }
 
@@ -487,7 +492,7 @@
       <div class="chip-group" role="group" aria-labelledby="grp-${gi}">
         <h3 class="grp-h" id="grp-${gi}">${esc(g.name)}</h3>
         <ul class="chips">${g.items.map(ch=>`
-          <li class="chip" data-id="${ch.id}" data-spoken="${esc(ch.spoken)}">
+          <li class="chip tone-${ch.tone}" data-id="${ch.id}" data-spoken="${esc(ch.spoken)}">
             <span>${esc(ch.short)}</span>
             <button type="button" aria-label="Remove filter: ${esc(ch.spoken)}">
               <svg width="10" height="10" viewBox="0 0 10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l8 8M9 1 1 9"/></svg>
