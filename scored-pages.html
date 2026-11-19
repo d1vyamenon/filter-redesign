@@ -232,7 +232,7 @@
         </div>
         <button class="txtbtn adv" id="advBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterDialog">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></svg>
-            <span id="advLabel">Advanced Search (0)</span>
+            <span id="advLabel">Filters (0)</span>
           </button>
       <button class="txtbtn clear" id="clearAll" type="button" hidden>
             <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>
@@ -340,7 +340,7 @@
   <h3>Keyboard guide</h3>
   <ul>
     <li><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move between controls</li>
-    <li><kbd>Enter</kbd> / <kbd>Space</kbd> open Advanced Search</li>
+    <li><kbd>Enter</kbd> / <kbd>Space</kbd> open Filters</li>
     <li><kbd>←</kbd> <kbd>→</kbd> pick ≤ = ≥</li>
     <li><kbd>↑</kbd> <kbd>↓</kbd> change the %</li>
     <li><kbd>Space</kbd> toggles an attempts option</li>
@@ -502,8 +502,8 @@
       </div>`).join("");
     document.getElementById("applied").hidden = c.length===0;
     clearAll.hidden=c.length===0;
-    $("#advLabel").textContent=`Advanced Search (${c.length})`;
-    advBtn.setAttribute("aria-label",`Advanced Search, ${c.length} filter${c.length===1?"":"s"} active`);
+    $("#advLabel").textContent=`Filters (${c.length})`;
+    advBtn.setAttribute("aria-label",`Filters, ${c.length} filter${c.length===1?"":"s"} active`);
   }
 
   function announce(prefix){
